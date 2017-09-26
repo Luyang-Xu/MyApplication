@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ThirdAActivity">
+        <activity android:name=".ThirdActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"></action>
                 <category android:name="android.intent.category.DEFAULT"></category>
