@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+
 import com.example.luyang.myapplication.controller.ActivityController;
 
 /**
@@ -18,7 +19,7 @@ public class ThirdActivity extends BaseActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.third_layout);
 
-        Button button3=findViewById(R.id.button3);
+        Button button3 = findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
