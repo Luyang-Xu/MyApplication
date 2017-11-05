@@ -14,4 +14,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="localbroadcastbutton" />
+
+    <EditText
+        android:id="@+id/textToFile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="content store in data/data/file"
+        android:text="" />
+
+    <Button
+        android:id="@+id/savetofile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="save to file" />
+
+    <Button
+        android:id="@+id/readfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="read from file"/>
+
+
+    <Button
+        android:id="@+id/writeSharedPreference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="write into SharedPreference"/>
+
+    <Button
+        android:id="@+id/readSharedPreference"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="read from SharedPreference"/>
+
 </LinearLayout>

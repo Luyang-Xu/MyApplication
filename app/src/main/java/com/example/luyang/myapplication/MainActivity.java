@@ -71,6 +71,16 @@ public class MainActivity extends BaseActivity {
         intentfilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         networkreceiver = new NetworkChangeReceiver();
         registerReceiver(networkreceiver, intentfilter);
+
+
+        Button loginbutton=findViewById(R.id.loginbutton);
+        loginbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Login.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //活动间的数据回传
