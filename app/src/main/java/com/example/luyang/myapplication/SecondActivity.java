@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -14,6 +16,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.luyang.myapplication.dbutil.MyDatabaseHelper;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -36,6 +40,15 @@ public class SecondActivity extends BaseActivity {
 
     LocalReceiver lr;
 
+    MyDatabaseHelper myHelper;
+
+    SQLiteDatabase db;
+
+    private Button add;
+    private Button delete;
+    private Button update;
+    private Button query;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +57,8 @@ public class SecondActivity extends BaseActivity {
         setContentView(R.layout.second_layout);
 
         localmanager = LocalBroadcastManager.getInstance(this);
+
+        myHelper = new MyDatabaseHelper(SecondActivity.this, "bookstore.db", null, 1);
 
         Intent intent = getIntent();
         Button button2 = findViewById(R.id.button2);
@@ -116,6 +131,70 @@ public class SecondActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 readSharedPreference();
+            }
+        });
+
+        //建立数据库
+
+        Button sqllitebutton = findViewById(R.id.writesqllite);
+        sqllitebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /**
+                 * create databae
+                 */
+                myHelper.getWritableDatabase();
+            }
+        });
+
+        //the CRUD of database
+
+        add = findViewById(R.id.add);
+        delete = findViewById(R.id.delete);
+        update = findViewById(R.id.update);
+        query = findViewById(R.id.query);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = myHelper.getWritableDatabase();
+                db.execSQL("insert into Book values(null,?,?,?,?) ", new String[]{"xuluyang", "23.33", "400", "hello world"});
+                db.execSQL("insert into Book values(null,?,?,?,?) ", new String[]{"yulinye", "51.51", "500", "new world"});
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = myHelper.getWritableDatabase();
+                db.execSQL("delete from Book where pages>?", new String[]{"420"});
+            }
+        });
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db=myHelper.getWritableDatabase();
+                db.execSQL("update Book set price=? where author=?",new String[]{"100.0","xuluyang"});
+            }
+        });
+
+        query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db=myHelper.getWritableDatabase();
+
+                Cursor cur=db.rawQuery("select * from Book",null);
+                if(cur.moveToFirst()){
+                    do{
+                        String author=cur.getString(cur.getColumnIndex("author"));
+                        int pages=cur.getInt(cur.getColumnIndex("pages"));
+                        Log.e("paged",String.valueOf(pages));
+                        Log.e("author",author);
+                    }while(cur.moveToNext());
+                }
+                cur.close();
+
             }
         });
 
