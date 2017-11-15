@@ -81,6 +81,16 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+
+        Button contentprovider=findViewById(R.id.contentProvider);
+        contentprovider.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Contacts.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //活动间的数据回传

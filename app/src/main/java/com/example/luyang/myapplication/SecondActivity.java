@@ -58,7 +58,7 @@ public class SecondActivity extends BaseActivity {
 
         localmanager = LocalBroadcastManager.getInstance(this);
 
-        myHelper = new MyDatabaseHelper(SecondActivity.this, "bookstore.db", null, 1);
+        myHelper = new MyDatabaseHelper(SecondActivity.this, "bookstore.db", null, 2);
 
         Intent intent = getIntent();
         Button button2 = findViewById(R.id.button2);
